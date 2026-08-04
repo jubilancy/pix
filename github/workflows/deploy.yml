@@ -1,0 +1,73 @@
+name: Deploy Asset Gallery
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'gif/gif.txt'
+      - 'svg/svg.txt'
+      - 'png/png.txt'
+      - 'icon/icon.txt'
+      - 'index.html'
+      - 'style.css'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Validate txt files format
+        run: |
+          for type in gif svg png icon; do
+            file="$type/$type.txt"
+            if [ ! -f "$file" ]; then echo "$file not found!"; exit 1; fi
+            while IFS= read -r line || [ -n "$line" ]; do
+              if [ -z "$line" ]; then continue; fi
+              if [[ ! "$line" =~ \| ]]; then echo "Invalid line in $file: $line"; exit 1; fi
+            done < "$file"
+            echo "✓ $file valid"
+          done
+      - name: Ensure index.html and style.css exist
+        run: |
+          if [ ! -f index.html ]; then echo "index.html not found!"; exit 1; fi
+          if [ ! -f style.css ]; then echo "style.css not found!"; exit 1; fi
+          echo "✓ index.html and style.css found"
+      - name: Build site folder
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp style.css _site/
+          for type in gif svg png icon; do
+            mkdir -p "_site/$type"
+            cp "$type/$type.txt" "_site/$type/"
+          done
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Create deployment summary
+        if: always()
+        run: |
+          echo "## 🎉 Asset Gallery Deployed!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Your gallery is now live at the GitHub Pages URL above." >> $GITHUB_STEP_SUMMARY

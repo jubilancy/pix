@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Asset Gallery</h1>
+            <p class="subtitle">Hover to preview • Click to copy • Select to download</p>
+        </header>
+
+        <div class="tabs" id="tabs">
+            <button class="tab-btn" data-type="gif" onclick="switchType('gif')">GIF</button>
+            <button class="tab-btn" data-type="svg" onclick="switchType('svg')">SVG</button>
+            <button class="tab-btn" data-type="png" onclick="switchType('png')">PNG</button>
+            <button class="tab-btn" data-type="icon" onclick="switchType('icon')">Icon</button>
+        </div>
+
+        <div class="controls">
+            <button class="btn primary" onclick="selectAll()">Select All (page)</button>
+            <button class="btn" onclick="deselectAll()">Deselect All</button>
+            <button class="btn primary" id="downloadBtn" onclick="downloadSelected()" disabled>Download Selected</button>
+        </div>
+
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Search..."
+                onkeyup="onSearch()"
+            >
+        </div>
+
+        <div class="per-page-select">
+            <label for="perPage">Per page:</label>
+            <select id="perPage" onchange="onPerPageChange()">
+                <option value="24">24</option>
+                <option value="48" selected>48</option>
+                <option value="96">96</option>
+                <option value="200">200</option>
+                <option value="all">All</option>
+            </select>
+        </div>
+
+        <div class="gallery" id="gallery"></div>
+
+        <div class="pagination" id="pagination"></div>
+
+        <div class="stats">
+            Total: <span id="totalCount">0</span> • Visible: <span id="visibleCount">0</span> • Selected: <span id="selectedCount">0</span>
+        </div>
+    </div>
+
+    <div class="asset-preview" id="assetPreview">
+        <img id="previewImage" src="" alt="">
+        <div class="asset-preview-name" id="previewName"></div>
+        <div class="preview-actions">
+            <button class="preview-btn" onclick="copyToClipboard()">📋 Copy URL</button>
+            <button class="preview-btn" onclick="copyName()">📝 Copy Name</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const TYPES = ['gif', 'svg', 'png', 'icon'];
+
+        let assets = [];
+        let currentPreview = null;
+        let selectedAssets = new Set();
+
+        let currentType = 'svg';
+        let currentPage = 1;
+        let perPage = 48; // number or 'all'
+
+        // Parses lines like: :cbi/asus-new:|https://files.svgcdn.io/cbi/asus-new.svg
+        function parseLine(line) {
+            const idx = line.indexOf('|');
+            if (idx === -1) return null;
+            const name = line.slice(0, idx).trim();
+            const url = line.slice(idx + 1).trim();
+            return name && url ? { name, url } : null;
+        }
+
+        async function loadAssets(type) {
+            try {
+                const response = await fetch(`${type}/${type}.txt`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const text = await response.text();
+
+                assets = text
+                    .split('\n')
+                    .map(parseLine)
+                    .filter(a => a !== null);
+            } catch (error) {
+                console.error(`Error loading ${type}:`, error);
+                assets = [];
+                showToast(`Error loading ${type} data`, 'error');
+            }
+        }
+
+        function getFiltered() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            return assets.filter(a => a.name.toLowerCase().includes(searchTerm));
+        }
+
+        function getTotalPages(filteredLength) {
+            if (perPage === 'all') return 1;
+            return Math.max(1, Math.ceil(filteredLength / perPage));
+        }
+
+        function getPageSlice(filtered) {
+            if (perPage === 'all') return filtered;
+            const start = (currentPage - 1) * perPage;
+            return filtered.slice(start, start + perPage);
+        }
+
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            const filtered = getFiltered();
+
+            const totalPages = getTotalPages(filtered.length);
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
+            const pageItems = getPageSlice(filtered);
+
+            if (filtered.length === 0) {
+                gallery.innerHTML = '<div class="empty-msg">No assets found</div>';
+                document.getElementById('visibleCount').textContent = '0';
+                document.getElementById('totalCount').textContent = assets.length;
+                renderPagination(0);
+                updateURL();
+                return;
+            }
+
+            gallery.innerHTML = pageItems.map((asset) => `
+                <div class="asset-card ${selectedAssets.has(asset.name) ? 'selected' : ''}" 
+                     onmouseenter="showPreview('${esc(asset.name)}', '${esc(asset.url)}')"
+                     onmouseleave="hidePreview()"
+                     onclick="toggleSelect(event, '${esc(asset.name)}')"
+                     ondblclick="copyToClipboard(event, '${esc(asset.url)}')"
+                >
+                    <input type="checkbox" class="checkbox-input" 
+                           ${selectedAssets.has(asset.name) ? 'checked' : ''}
+                           onclick="event.stopPropagation()"
+                    >
+                    <img src="${asset.url}" alt="${asset.name}" class="asset-image" loading="lazy" onerror="this.style.opacity='0.3'">
+                    <div class="asset-name">${asset.name}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('totalCount').textContent = assets.length;
+            document.getElementById('visibleCount').textContent = filtered.length;
+
+            renderPagination(totalPages);
+            updateURL();
+        }
+
+        function esc(str) {
+            return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+        }
+
+        function renderPagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+
+            if (perPage === 'all' || totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+
+            const buttons = [];
+            buttons.push(`<button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="goToPage(${currentPage - 1})">‹ Prev</button>`);
+
+            getPageNumbers(currentPage, totalPages).forEach(p => {
+                if (p === '...') {
+                    buttons.push(`<span class="page-ellipsis">…</span>`);
+                } else {
+                    buttons.push(`<button class="page-btn ${p === currentPage ? 'active' : ''}" onclick="goToPage(${p})">${p}</button>`);
+                }
+            });
+
+            buttons.push(`<button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="goToPage(${currentPage + 1})">Next ›</button>`);
+            pagination.innerHTML = buttons.join('');
+        }
+
+        function getPageNumbers(current, total) {
+            const delta = 1;
+            const range = [];
+            const pages = [];
+
+            for (let i = Math.max(2, current - delta); i <= Math.min(total - 1, current + delta); i++) {
+                range.push(i);
+            }
+
+            pages.push(1);
+            if (range[0] > 2) pages.push('...');
+            pages.push(...range);
+            if (range[range.length - 1] < total - 1) pages.push('...');
+            if (total > 1) pages.push(total);
+
+            return [...new Set(pages)];
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderGallery();
+            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function onSearch() {
+            currentPage = 1;
+            renderGallery();
+        }
+
+        function onPerPageChange() {
+            const val = document.getElementById('perPage').value;
+            perPage = val === 'all' ? 'all' : parseInt(val, 10);
+            currentPage = 1;
+            renderGallery();
+        }
+
+        async function switchType(type, opts = {}) {
+            if (!TYPES.includes(type)) type = 'svg';
+            currentType = type;
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type === type);
+            });
+
+            if (!opts.skipReset) {
+                currentPage = 1;
+                selectedAssets.clear();
+                document.getElementById('searchInput').value = '';
+                updateDownloadBtn();
+            }
+
+            await loadAssets(type);
+            renderGallery();
+        }
+
+        function updateURL() {
+            const params = new URLSearchParams();
+            params.set('type', currentType);
+            const searchTerm = document.getElementById('searchInput').value;
+            if (searchTerm) params.set('q', searchTerm);
+            params.set('per', perPage);
+            if (currentPage > 1) params.set('page', currentPage);
+
+            const newURL = `${location.pathname}?${params.toString()}`;
+            history.replaceState(null, '', newURL);
+        }
+
+        function restoreStateFromURL() {
+            const params = new URLSearchParams(location.search);
+            const type = params.get('type');
+            const q = params.get('q');
+            const per = params.get('per');
+            const page = params.get('page');
+
+            if (type && TYPES.includes(type)) currentType = type;
+
+            if (q) document.getElementById('searchInput').value = q;
+
+            if (per) {
+                if (per === 'all') {
+                    perPage = 'all';
+                    document.getElementById('perPage').value = 'all';
+                } else {
+                    const n = parseInt(per, 10);
+                    if (!isNaN(n)) {
+                        perPage = n;
+                        const select = document.getElementById('perPage');
+                        if ([...select.options].some(o => o.value === String(n))) {
+                            select.value = String(n);
+                        }
+                    }
+                }
+            }
+
+            if (page) {
+                const p = parseInt(page, 10);
+                if (!isNaN(p) && p > 0) currentPage = p;
+            }
+        }
+
+        function showPreview(name, url) {
+            currentPreview = { name, url };
+            const preview = document.getElementById('assetPreview');
+            document.getElementById('previewImage').src = url;
+            document.getElementById('previewName').textContent = name;
+            preview.classList.add('active');
+        }
+
+        function hidePreview() {
+            document.getElementById('assetPreview').classList.remove('active');
+        }
+
+        function toggleSelect(event, name) {
+            if (event.target.classList.contains('checkbox-input')) return;
+
+            if (selectedAssets.has(name)) {
+                selectedAssets.delete(name);
+            } else {
+                selectedAssets.add(name);
+            }
+
+            renderGallery();
+            updateDownloadBtn();
+        }
+
+        function selectAll() {
+            // Selects only the assets visible on the current page
+            const filtered = getFiltered();
+            const pageItems = getPageSlice(filtered);
+            pageItems.forEach(a => selectedAssets.add(a.name));
+            renderGallery();
+            updateDownloadBtn();
+        }
+
+        function deselectAll() {
+            selectedAssets.clear();
+            renderGallery();
+            updateDownloadBtn();
+        }
+
+        function updateDownloadBtn() {
+            const btn = document.getElementById('downloadBtn');
+            btn.disabled = selectedAssets.size === 0;
+            document.getElementById('selectedCount').textContent = selectedAssets.size;
+        }
+
+        function copyToClipboard(event, url) {
+            const urlToCopy = url || (currentPreview ? currentPreview.url : null);
+            if (!urlToCopy) return;
+
+            navigator.clipboard.writeText(urlToCopy).then(() => {
+                showToast('URL copied to clipboard!');
+            }).catch(() => {
+                showToast('Failed to copy', 'error');
+            });
+        }
+
+        function copyName() {
+            if (currentPreview) {
+                navigator.clipboard.writeText(currentPreview.name).then(() => {
+                    showToast('Name copied to clipboard!');
+                }).catch(() => {
+                    showToast('Failed to copy', 'error');
+                });
+            }
+        }
+
+        function safeFileName(name) {
+            // ":cbi/asus-new:" -> "cbi-asus-new"
+            return name.replace(/^:|:$/g, '').replace(/\//g, '-');
+        }
+
+        async function downloadSelected() {
+            if (selectedAssets.size === 0) return;
+
+            try {
+                const JSZip = (await import('https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm')).default;
+                const zip = new JSZip();
+
+                let downloaded = 0;
+
+                for (const name of selectedAssets) {
+                    const asset = assets.find(a => a.name === name);
+                    if (!asset) continue;
+
+                    try {
+                        const response = await fetch(asset.url);
+                        const blob = await response.blob();
+
+                        const urlExt = asset.url.split('.').pop().split('?')[0];
+                        const ext = urlExt || currentType;
+                        zip.file(`${safeFileName(asset.name)}.${ext}`, blob);
+                        downloaded++;
+                    } catch (e) {
+                        console.error(`Failed to download ${asset.name}:`, e);
+                    }
+                }
+
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                const url = URL.createObjectURL(zipBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentType}-${Date.now()}.zip`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                showToast(`Downloaded ${downloaded} file${downloaded !== 1 ? 's' : ''}`);
+                deselectAll();
+            } catch (error) {
+                console.error('Download error:', error);
+                showToast('Error downloading files', 'error');
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.toggle('error', type === 'error');
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        async function init() {
+            restoreStateFromURL();
+            await switchType(currentType, { skipReset: true });
+        }
+
+        init();
+    </script>
+</body>
+</html>

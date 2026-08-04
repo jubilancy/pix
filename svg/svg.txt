@@ -1,0 +1,5 @@
+:cbi/asus-new:|https://files.svgcdn.io/cbi/asus-new.svg
+:cbi/aston-martin:|https://files.svgcdn.io/cbi/aston-martin.svg
+:cbi/arte:|https://files.svgcdn.io/cbi/arte.svg
+:cbi/arlo-video-doorbell:|https://files.svgcdn.io/cbi/arlo-video-doorbell.svg
+:cbi/arlo-ultra-2:|https://files.svgcdn.io/cbi/arlo-ultra-2.svg
