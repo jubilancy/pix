@@ -12462,7 +12462,6 @@
 :vs-code-extension:|https://files.svgcdn.io/vs-code-extension.svg
 :figma-plugin:|https://files.svgcdn.io/figma-plugin.svg
 :search:|https://files.svgcdn.io/search.svg
-
 :accessibility-outline.svg:|https://raw.githubusercontent.com/ionic-team/ionicons/refs/heads/main/src/svg/accessibility-outline.svg
 :accessibility-sharp.svg:|https://raw.githubusercontent.com/ionic-team/ionicons/refs/heads/main/src/svg/accessibility-sharp.svg
 :accessibility.svg:|https://raw.githubusercontent.com/ionic-team/ionicons/refs/heads/main/src/svg/accessibility.svg
