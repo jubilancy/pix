@@ -8,6 +8,16 @@ on:
       - 'svg/svg.txt'
       - 'png/png.txt'
       - 'icon/icon.txt'
+      - 'webp/webp.txt'
+      - 'jpg/jpg.txt'
+      - 'avatar/avatar.txt'
+      - 'banner/banner.txt'
+      - 'pattern/pattern.txt'
+      - 'sticker/sticker.txt'
+      - 'emoji/emoji.txt'
+      - 'background/background.txt'
+      - 'logo/logo.txt'
+      - 'cursor/cursor.txt'
       - 'index.html'
       - 'style.css'
       - '.github/workflows/deploy.yml'
@@ -23,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Validate txt files format
         run: |
-          for type in gif svg png icon; do
+          for type in gif svg png icon webp jpg avatar banner pattern sticker emoji background logo cursor; do
             file="$type/$type.txt"
             if [ ! -f "$file" ]; then echo "$file not found!"; exit 1; fi
             while IFS= read -r line || [ -n "$line" ]; do
@@ -42,7 +52,7 @@ jobs:
           mkdir -p _site
           cp index.html _site/
           cp style.css _site/
-          for type in gif svg png icon; do
+          for type in gif svg png icon webp jpg avatar banner pattern sticker emoji background logo cursor; do
             mkdir -p "_site/$type"
             cp "$type/$type.txt" "_site/$type/"
           done

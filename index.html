@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Gallery</title>
+    <title>ellie's asset gallery</title>
+    <link rel="icon" href="https://64.media.tumblr.com/714b6caf54dd9e38536638d20018db7e/f5b8ad3a70769dbd-1c/s75x75_c1/ae95dbdb7a2067b8bb0396d62c2232e57bfe8101.gifv">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,6 +20,16 @@
             <button class="tab-btn" data-type="svg" onclick="switchType('svg')">SVG</button>
             <button class="tab-btn" data-type="png" onclick="switchType('png')">PNG</button>
             <button class="tab-btn" data-type="icon" onclick="switchType('icon')">Icon</button>
+            <button class="tab-btn" data-type="webp" onclick="switchType('webp')">Webp</button>
+            <button class="tab-btn" data-type="jpg" onclick="switchType('jpg')">JPG</button>
+            <button class="tab-btn" data-type="avatar" onclick="switchType('avatar')">Avatar</button>
+            <button class="tab-btn" data-type="banner" onclick="switchType('banner')">Banner</button>
+            <button class="tab-btn" data-type="pattern" onclick="switchType('pattern')">Pattern</button>
+            <button class="tab-btn" data-type="sticker" onclick="switchType('sticker')">Sticker</button>
+            <button class="tab-btn" data-type="emoji" onclick="switchType('emoji')">Emoji</button>
+            <button class="tab-btn" data-type="background" onclick="switchType('background')">Background</button>
+            <button class="tab-btn" data-type="logo" onclick="switchType('logo')">Logo</button>
+            <button class="tab-btn" data-type="cursor" onclick="switchType('cursor')">Cursor</button>
         </div>
 
         <div class="controls">
@@ -68,7 +79,7 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        const TYPES = ['gif', 'svg', 'png', 'icon'];
+        const TYPES = ['gif', 'svg', 'png', 'icon', 'webp', 'jpg', 'avatar', 'banner', 'pattern', 'sticker', 'emoji', 'background', 'logo', 'cursor'];
 
         let assets = [];
         let currentPreview = null;

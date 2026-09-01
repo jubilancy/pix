@@ -1,0 +1,1 @@
+:placeholder/example:|https://example.com/placeholder/jpg/example.jpg
