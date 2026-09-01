@@ -48,7 +48,6 @@
 :blob-sign-yay:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/blob-sign/blob-sign-yay.png			
 :blob-sign-yes:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/blob-sign/blob-sign-yes.png			
 :blob-sign-yo:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/blob-sign/blob-sign-yo.png
-			
 :blob-100-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/blob/blob-100-gif.gif			
 :blob-amused:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/blob/blob-amused.png			
 :blob-angel-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/blob/blob-angel-gif.gif			
@@ -655,7 +654,6 @@
 :froge-wizard:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/froge/froge-wizard.gif			
 :froge-yah:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/froge/froge-yah.png			
 :froge:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/froge/froge.png
-			
 :froggie-angry:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/froggie/froggie-angry.png			
 :froggie-bonk:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/froggie/froggie-bonk.png			
 :froggie-celebrate:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/froggie/froggie-celebrate.png			
@@ -672,7 +670,6 @@
 :froggie-squish-i:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/froggie/froggie-squish-i.png			
 :froggie-vibing-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/froggie/froggie-vibing-gif.gif			
 :froggie-wave:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/froggie/froggie-wave.png
-			
 :gopha-angry:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/gopha/gopha-angry.png			
 :gopha-autumn:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/gopha/gopha-autumn.png			
 :gopha-awake:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/gopha/gopha-awake.png			
@@ -709,7 +706,6 @@
 :gopha-tehepero:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/gopha/gopha-tehepero.png			
 :gopha-thank-you:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/gopha/gopha-thank-you.png			
 :gopha-work:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/gopha/gopha-work.png
-			
 :he-brings-you-100:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/he-brings-you/he-brings-you-100.png			
 :he-brings-you-1m:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/he-brings-you/he-brings-you-1m.png			
 :he-brings-you-a-baguette:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/he-brings-you/he-brings-you-a-baguette.png			
@@ -1253,7 +1249,6 @@
 :he-brings-you-zoom:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/he-brings-you/he-brings-you-zoom.gif			
 :he-brings-you:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/he-brings-you/he-brings-you.png			
 :she-brings-you-cashkite:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/he-brings-you/she-brings-you-cashkite.png
-			
 :llama-angry-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/llamas/llama-angry-gif.gif			
 :llama-awesome-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/llamas/llama-awesome-gif.gif			
 :llama-bleh-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/llamas/llama-bleh-gif.gif			
@@ -1333,7 +1328,6 @@
 :llama-yawn-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/llamas/llama-yawn-gif.gif			
 :llama-yay-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/llamas/llama-yay-gif.gif			
 :llama-yes-food-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/llamas/llama-yes-food-gif.gif
-			
 :meow-0w0:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/meow/meow-0w0.png			
 :meow-alien:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/meow/meow-alien.png			
 :meow-angry-intensifies-gif:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/meow/meow-angry-intensifies-gif.gif			
@@ -1473,7 +1467,6 @@
 :meow-xd:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/meow/meow-xd.png			
 :meow-yaranaika:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/meow/meow-yaranaika.png			
 :meow-yikes:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/meow/meow-yikes.png
-			
 :parrot-60-fps:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/parrots/parrot-60-fps.gif			
 :parrot-abkhazia:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/parrots/parrot-abkhazia.gif			
 :parrot-afghanistan:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/parrots/parrot-afghanistan.gif			
@@ -1870,7 +1863,6 @@
 :party-troll:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/parrots/party-troll.gif			
 :party-witness-protection:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/parrots/party-witness-protection.gif			
 :party-wizard:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/parrots/party-wizard.gif
-			
 :party-+1:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/party/party-+1.png			
 :party--1:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/party/party--1.png			
 :party-100:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/party/party-100.png			
@@ -3303,7 +3295,6 @@
 :party-zero:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/party/party-zero.png			
 :party-zipper-mouth-face:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/party/party-zipper-mouth-face.png			
 :party-zzz:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/party/party-zzz.png
-			
 :blob-pkmn-bellsprout:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/pokemon/blob-pkmn-bellsprout.png			
 :blob-pkmn-blastoise:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/pokemon/blob-pkmn-blastoise.png			
 :blob-pkmn-bulbasaur:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/pokemon/blob-pkmn-bulbasaur.png			
@@ -3349,7 +3340,6 @@
 :blob-pkmn-weedle:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/pokemon/blob-pkmn-weedle.png			
 :blob-pkmn-wooloo:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/pokemon/blob-pkmn-wooloo.gif			
 :blob-pkmn-zubat:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/pokemon/blob-pkmn-zubat.png
-			
 :l----a:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/scrabble/l----a.jpg			
 :l----b:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/scrabble/l----b.jpg			
 :l----blank:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/scrabble/l----blank.jpg			
@@ -3458,7 +3448,6 @@
 :l-x:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/scrabble/l-x.jpg			
 :l-y:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/scrabble/l-y.jpg			
 :l-z:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/scrabble/l-z.jpg
-			
 :shiblob-ban:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/shiblob/shiblob-ban.png			
 :shiblob-cool:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/shiblob/shiblob-cool.png			
 :shiblob-evil:|https://raw.githubusercontent.com/seanprashad/slackmoji/refs/heads/master/emoji/shiblob/shiblob-evil.png			
