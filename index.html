@@ -17,6 +17,7 @@
         </header>
 
         <div class="tabs" id="tabs">
+            <button class="tab-btn" data-type="88x31" onclick="switchType('88x31')">88x31</button>
             <button class="tab-btn" data-type="gif" onclick="switchType('gif')">GIF</button>
             <button class="tab-btn" data-type="svg" onclick="switchType('svg')">SVG</button>
             <button class="tab-btn" data-type="png" onclick="switchType('png')">PNG</button>
@@ -80,7 +81,7 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        const TYPES = ['gif', 'svg', 'png', 'icon', 'webp', 'jpg', 'avatar', 'banner', 'pattern', 'sticker', 'emoji', 'background', 'logo', 'cursor'];
+        const TYPES = ['gif', '88x31', 'svg', 'png', 'icon', 'webp', 'jpg', 'avatar', 'banner', 'pattern', 'sticker', 'emoji', 'background', 'logo', 'cursor'];
 
         let assets = [];
         let currentPreview = null;
