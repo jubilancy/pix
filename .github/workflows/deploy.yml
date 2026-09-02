@@ -6,6 +6,7 @@ on:
     paths:
       - 'gif/gif.txt'
       - 'svg/svg.txt'
+      - '88x31/88x31.txt'
       - 'png/png.txt'
       - 'icon/icon.txt'
       - 'webp/webp.txt'
@@ -33,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Validate txt files format
         run: |
-          for type in gif svg png icon webp jpg avatar banner pattern sticker emoji background logo cursor; do
+          for type in gif 88x31 svg png icon webp jpg avatar banner pattern sticker emoji background logo cursor; do
             file="$type/$type.txt"
             if [ ! -f "$file" ]; then echo "$file not found!"; exit 1; fi
             while IFS= read -r line || [ -n "$line" ]; do
@@ -52,7 +53,7 @@ jobs:
           mkdir -p _site
           cp index.html _site/
           cp style.css _site/
-          for type in gif svg png icon webp jpg avatar banner pattern sticker emoji background logo cursor; do
+          for type in gif 88x31 svg png icon webp jpg avatar banner pattern sticker emoji background logo cursor; do
             mkdir -p "_site/$type"
             cp "$type/$type.txt" "_site/$type/"
           done
